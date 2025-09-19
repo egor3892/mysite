@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/formexample.css' %}">
+</head>
+<body>
+<form method="post">
+  <div class="imgcontainer">
+    <img src="{% static 'img/images.png'%}" alt="Avatar" class="avatar" style="width: 120px; height: 120px;">
+  </div>
+
+  <div class="container">
+    {% csrf_token %}
+    <label for="uname"><b>Username</b></label>
+    <!-- <input type="text" placeholder="Enter Username" name="uname" required> -->
+     {{ form.username }}
+
+    <label for="psw"><b>Password</b></label>
+    <!-- <input type="password" placeholder="Enter Password" name="psw" required> -->
+    {{ form.password }}
+
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>    
+  <!-- <form method="post"> -->
+        <!-- {% csrf_token %} -->
+        <!-- {{ form.as_p }}   выводим форму красиво -->
+        
+        <!-- <button type="submit" class="btn btn-primary w-100">Login</button> -->
+      <!-- </form> -->
+</body>
+</html>

@@ -1,6 +1,12 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+class Department(models.Model):
+    title = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
 class Post(models.Model):
     class Status(models.TextChoices):
         DRAFT = 'DF', 'Draft'
@@ -17,6 +23,7 @@ class Post(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
     status = models.CharField(
         max_length=2,
         choices=Status,
