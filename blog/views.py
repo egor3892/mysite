@@ -19,8 +19,6 @@ def home(request):
 def aboutpage(request):
     return render(request, "blog/aboutpage.html", {})
 
-def loginpage(request):
-    return render(request, "blog/loginpage.html", {})
 
 def user_login(request):
     if request.method == 'POST':
