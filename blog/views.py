@@ -14,7 +14,7 @@ def home(request):
     # print(list(workers_macro_data))
     for p in postsdep:
         print(p.title, p.department)
-    return render(request, "blog/index.html", { "posts":posts,"postsfiltered":postsfiltered})
+    return render(request, "blog/index.html", { "posts":posts})
 
 def aboutpage(request):
     return render(request, "blog/aboutpage.html", {})
