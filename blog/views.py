@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .forms import LoginForm
-from django.shortcuts import render
+from .forms import LoginForm, UserRegistrationForm
+from django.shortcuts import render, redirect
 from .models import Post, Department
 # Create your views here.
 def home(request):
@@ -18,6 +18,20 @@ def home(request):
 
 def aboutpage(request):
     return render(request, "blog/aboutpage.html", {})
+
+def signupdone(request):
+    return render(request, "signupdone.html", {})
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('signupdone')
+    else:
+        form = UserRegistrationForm()
+    return render(request, "blog/signup.html", {"form": form})
+
 
 
 def user_login(request):
