@@ -80,13 +80,22 @@
                 <a class="nav-link" href="{% url 'about' %}">About</a>
               </li>
             </ul>
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
+              {% if request.user.is_authenticated %}
+              <span class="text-white me-3"
+                >Hello, {{ request.user.username }}!</span
+              >
+              <a href="{% url 'logout' %}" class="btn btn-outline-light me-2"
+                >Logout</a
+              >
+              {% else %}
               <a href="{% url 'loginpage' %}" class="btn btn-outline-light me-2"
                 >Login</a
               >
               <a href="{% url 'signuppage' %}" class="btn btn-warning"
                 >Sign-up</a
               >
+              {% endif %}
             </div>
           </div>
         </div>

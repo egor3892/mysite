@@ -1,17 +1,29 @@
-{% extends "blog/base.html" %}
-{% block content %}
+{% extends "blog/base.html" %} {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">Posts</h2>
-    {% for post in posts %}
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">{{ post.title }}</h5>
-          <p class="card-text">{{ post.body }}</p>
-          <small class="text-muted">By {{ post.author }} | {{ post.created }}</small>
-        </div>
-      </div>
-    {% empty %}
-      <p>No posts found.</p>
-    {% endfor %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Posts</h2>
+    <a href="{% url 'add_post' %}" class="btn btn-success">Add post</a>
   </div>
+  {% for post in posts %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text">{{ post.body }}</p>
+      <small class="text-muted"
+        >By {{ post.author }} | {{ post.created }}</small
+      >
+      {% if request.user == post.author %}
+      <a href="{% url 'edit_post' post.id %}" class="btn btn-sm btn-warning"
+        >Edit</a
+      >
+      <a href="{% url 'delete_post' post.id %}" class="btn btn-sm btn-danger"
+        >Delete</a
+      >
+      {% endif %}
+    </div>
+  </div>
+  {% empty %}
+  <p>No posts found.</p>
+  {% endfor %}
+</div>
 {%endblock %}

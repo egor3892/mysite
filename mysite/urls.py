@@ -26,4 +26,8 @@ urlpatterns = [
     path('signup', views.signup, name='signuppage'),
     path('signupdone', views.signupdone, name='signupdone'),
     path('posts', views.posts, name='posts'),
+    path('logout', views.logout_view, name='logout'),
+    path('posts/<int:post_id>/edit/', views.edit_post, name='edit_post'),
+    path('posts/<int:post_id>/delete/', views.delete_post, name='delete_post'),
+    path('posts/add/', views.add_post, name='add_post'),
 ]

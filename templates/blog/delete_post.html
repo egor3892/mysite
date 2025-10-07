@@ -1,0 +1,59 @@
+{% extends "blog/base.html" %} {% block content %}
+<div class="container mt-4">
+  <h2>Delete Post</h2>
+  <p>Are you sure you want to delete "{{ post.title }}"?</p>
+  <!-- Кнопка для открытия модального окна -->
+  <button
+    type="button"
+    class="btn btn-danger"
+    data-bs-toggle="modal"
+    data-bs-target="#confirmDeleteModal"
+  >
+    Delete
+  </button>
+  <a href="{% url 'posts' %}" class="btn btn-secondary">Cancel</a>
+
+  <!-- Модальное окно Bootstrap -->
+  <div
+    class="modal fade"
+    id="confirmDeleteModal"
+    tabindex="-1"
+    aria-labelledby="confirmDeleteModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteModalLabel">
+            Confirm Delete
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete "{{ post.title }}"?
+        </div>
+        <div class="modal-footer d-flex flex-column align-items-center">
+          <form method="post" class="w-100">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger w-100 mb-2">
+              Yes, delete
+            </button>
+          </form>
+          <button
+            type="button"
+            class="btn btn-secondary w-100"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
