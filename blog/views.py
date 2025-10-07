@@ -32,7 +32,9 @@ def signup(request):
         form = UserRegistrationForm()
     return render(request, "blog/signup.html", {"form": form})
 
-
+def posts(request):
+    posts = Post.objects.all()
+    return render(request, "blog/posts.html", {"posts": posts})
 
 def user_login(request):
     if request.method == 'POST':
@@ -44,14 +46,16 @@ def user_login(request):
                 username=cd['username'],
                 password=cd['password']
             )
-        if user is not None:
-            if user.is_active:
+            if user is not None and user.is_active:
                 login(request, user)
-                return HttpResponse('Authenticated successfully')
+                # Remember me обработка
+                if not request.POST.get('remember'):
+                    request.session.set_expiry(0)
+                else:
+                    request.session.set_expiry(1209600)
+                return redirect('home')
             else:
-                return HttpResponse('Disabled account')
-        else:
-            return HttpResponse('Invalid login')
+                return HttpResponse('Invalid login or disabled account')
     else:
         form = LoginForm()
     return render(request, 'blog/loginpage.html', {'form': form})

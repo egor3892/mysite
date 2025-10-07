@@ -14,15 +14,23 @@ class UserRegistrationForm(forms.ModelForm):
         return user
     password = forms.CharField(
         label='Password',
-        widget=forms.PasswordInput
+        widget=forms.PasswordInput(attrs={
+        'class': 'form-control',
+        'id': 'form3Example4c',
+        'placeholder': 'Enter password'
+    })
     )
     password2 = forms.CharField(
         label='Repeat password',
-        widget=forms.PasswordInput
+        widget=forms.PasswordInput(attrs={
+        'class': 'form-control',
+        'id': 'form3Example4cd',
+        'placeholder': 'Repeat your password'
+    })
     )
     class Meta:
         model = get_user_model()
-        fields = ['username', 'first_name', 'email']
+        fields = ['username', 'first_name', 'email', 'password', 'password2']
         widgets = {
             'username': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -38,16 +46,6 @@ class UserRegistrationForm(forms.ModelForm):
                 'class': 'form-control',
                 'id': 'form3Example3c',
                 'placeholder': 'Enter email'
-            }),
-            'password': forms.PasswordInput(attrs={
-                'class': 'form-control',
-                'id': 'form3Example4c',
-                'placeholder': 'Enter password'
-            }),
-            'password2': forms.PasswordInput(attrs={
-                'class': 'form-control',
-                'id': 'form3Example4cd',
-                'placeholder': 'Repeat your password'
             }),
                 
         }
